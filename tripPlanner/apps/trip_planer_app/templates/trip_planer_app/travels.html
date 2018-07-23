@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <style>
+        body{
+            margin: 20px;
+            width: 900px;
+            min-height: 400px;
+        }
+        label {
+            width: 100px ;
+            
+        }
+        .courseName, .courseDesc{
+            width: 200px;
+        }
+        .courseDesc{
+            min-height: 80px;
+        }
+       #add{
+           background: #212529;
+           min-width: 80px;;
+           height: 45px;
+           border-radius: 10px;
+           margin: 5px 0px 5px 5px;
+           color: white;
+           font-weight: bolder;
+       }
+       .Welcome{
+           display: inline-block;
+           vertical-align: top;
+           text-align: left;
+       }
+       .logOut{
+           display: inline-block;
+           vertical-align: top;
+           margin: 5px 0px 0px 60% ;
+           text-decoration: underline;
+           font-weight: bold;
+       }
+       a{
+           text-decoration: underline;
+       }
+    </style>
+</head>
+
+<body>
+    <div class="Welcome">
+        <h2>Welcome,  {{ request.session.first_name }}</h2>
+    </div>
+    <div class="logOut">
+            <a href="/logout" alt="logout">Logout</a>
+    </div>
+
+    <!-- <form action="/createPlan" method="POST"> -->
+        {% csrf_token %} </br>
+
+    <div class="tripSchedule">
+        <h4>Your Trip Schedules</h4>
+        
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Trip Plan</th>
+                <th scope="col">Travel Start Date</th>
+                <th scope="col">Travel End Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for user_trip in flagged_trips %}
+              <tr>
+                <td><a href="/show/{{user_trip.trip.id}}">{{ user_trip.trip.destination }}</a>
+                    <input type="hidden" name="trip_id" value="{{ user_trip.trip.id }}" >
+                </td>
+                <td>{{ user_trip.trip.travelDateFrom }}</td>
+                <td>{{ user_trip.trip.travelDateTo }}</td>
+                <td>{{ user_trip.trip.desc }}</td>
+                <td>
+                    <a href="/cancel/{{user_trip.trip.id}}" type="Show user" >Cancel</a>
+                    {% if user_trip.is_created == True %}
+                    <a href="/delete/{{user_trip.trip.id}}" type="Show user" >Delete</a>
+                    {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="otherTrips">
+        <h4>Other User's Travel Plans</h4>
+        <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Travel Start Date</th>
+                    <th scope="col">Travel End Date</th>
+                    <th scope="col">Do You Want to Join ?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for otherTrip in trips_created %}
+                  <tr>
+                    <td><a href="/show/{{otherTrip.id}}">{{ otherTrip.destination }}</a></td>
+                    <td>{{ otherTrip.travelDateFrom }}</td>
+                    <td>{{ otherTrip.travelDateTo }}</td>
+                    <td>
+                        <a href="/join/{{otherTrip.id}}" type="Show user" >Join</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    </div>    
+    <a id="add" href="/createPlan" name="add" alt="Add Plan" >Add Plan</a>
+    <!-- </form> -->
+
+    <!-- 
+        BootStrap codes will goes here
+     -->
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+    
+    <style>
+        body{
+            margin: 20px;
+            width: auto;
+            min-height: 400px;
+            outline: 3px gray solid;
+        }
+        
+        .triptable {
+            margin: 30px auto;
+        }
+        label {
+            width: auto ;
+            
+        }
+        .courseName, .courseDesc{
+            width: auto;
+        }
+        .courseDesc{
+           
+        }
+       #add{
+           background: #212529;
+           width: 80px;;
+           height: 45px;
+           border-radius: 10px;
+           margin: 5px 0px 5px 5px;
+           color: green;
+           font-weight: bolder;
+       }
+       .logOut {
+           text-align: right;
+           font-size: 16px;
+           text-decoration: underline;
+           font-weight: bold;
+         }
+       tr {
+           width: 100%;
+       }
+      
+       .alert {
+           width: 50%;
+           text-align: center;
+           color: red;
+           margin: 0% auto;
+           font-weight: bold;
+       }
+      
+    </style>
+</head>
+<body>
+    
+    <form action="/createTrips" method="POST">
+    {% csrf_token %} </br>
+    
+        <table class="triptable">
+            <tr>
+             {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                {{ message }}
+            </div>
+            {% endfor %}
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <p class="logOut">
+                        <a href="/back" alt="back">Back</a>
+                        <span>|</span>
+                        <a href="/logout" alt="logout">Logout</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="Welcome"> <h3>Add a Plan</h3></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Destination:</td>
+                <td>               
+                     <input id="name" type="text" class="tripName" name="tripName"></br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Description:</td>
+                <td>
+                    <input id="description" class="courseDesc" type="text" name="tripDesc"></br>
+                </td>
+            </tr>
+            <tr>
+                <td>Travel Date From:</td>
+                <td>
+                    <input id="startDate" class="startDate" type="date" name="travelStartDate"></br>
+                </td>
+            </tr>
+            <tr>
+                <td>Travel Date To:</td>
+                <td>
+                    <input id="travelDateTo" class="travelDateTo" type="date" name="travelDateTo"></br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input id="add" type="submit" name="add" value="Add" >
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <!-- 
+        BootStrap codes will goes here
+     -->
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     
+</body>
+</html>

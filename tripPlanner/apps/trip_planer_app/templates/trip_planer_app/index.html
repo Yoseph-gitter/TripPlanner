@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <style>
+
+       *{
+           padding: 0px;
+           margin: 0px;
+       }
+       .validations{
+           background: white;
+           width: auto;
+           min-height: 40px;
+           color:red;
+       }
+       .aside {
+           max-width: 200px;
+           
+           display: inline-block;
+           vertical-align: top;
+          
+           /* border: 5px solid brown; */
+           margin: 0px auto;
+           padding:  30px 30px 30px -30px;
+       }
+       .container{
+           max-width: 650px;
+           
+           display: inline-block;
+           vertical-align: top;
+           padding: 15px , 0px , 10px, 20px;
+           /* border: 5px solid brown; */
+       }
+
+       .parentDiv{
+           width: 70%;
+           border: 2px solid lightgray;
+           min-height: 200px;
+           padding: 50px;
+       }
+   </style>
+</head>
+<body>
+<!--  Bootstrap will goes here -->
+   <div class="parentDiv">
+    <div class="container">
+        <div class="row">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            {{ message }}
+            </div>
+            {% endfor %}
+        </div>   
+        <h2>Welcome to Trip</h2>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form action="/register"  method="POST">
+                    {% csrf_token %}
+
+                    <h2>Register</h2>
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="aside">
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            <h2>Log In</h2>
+            <div class="form-group">
+                <input type="email" name="email" id="email_login" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="password" name="password" id="password_login" class="form-control input-lg" placeholder="Password" tabindex="8">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6"><input type="submit" value="signin" class="btn btn-success btn-block btn-lg" tabindex="9"></div>
+
+            </div>
+        </form>
+    </div>
+</div>
+    <!--  Bootstrap will END here -->
+
+     <!-- 
+        BootStrap codes will goes here
+     -->
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 
+    
+</body>
+</html>
